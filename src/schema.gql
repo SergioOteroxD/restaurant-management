@@ -1,0 +1,151 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+interface Ipaginator {
+  previousPageIndex: Int!
+  nextPageIndex: Int!
+  totalPages: Int!
+  totalDocuments: Int!
+  pageIndex: Int!
+  pageSize: Int!
+}
+
+type Restaurant {
+  restaurantId: String!
+  name: String!
+  desription: String!
+  city: String!
+  address: String!
+  photo: String!
+  registrationDate: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Reservation {
+  reservationId: String!
+  name: String!
+  email: String!
+  phone: String!
+  restaurantId: String!
+  reservationDate: DateTime!
+  registrationDate: DateTime!
+}
+
+type ResponseHttp {
+  code: String!
+  message: String!
+  status: HttpStatus!
+}
+
+enum HttpStatus {
+  CONTINUE
+  SWITCHING_PROTOCOLS
+  PROCESSING
+  EARLYHINTS
+  OK
+  CREATED
+  ACCEPTED
+  NON_AUTHORITATIVE_INFORMATION
+  NO_CONTENT
+  RESET_CONTENT
+  PARTIAL_CONTENT
+  AMBIGUOUS
+  MOVED_PERMANENTLY
+  FOUND
+  SEE_OTHER
+  NOT_MODIFIED
+  TEMPORARY_REDIRECT
+  PERMANENT_REDIRECT
+  BAD_REQUEST
+  UNAUTHORIZED
+  PAYMENT_REQUIRED
+  FORBIDDEN
+  NOT_FOUND
+  METHOD_NOT_ALLOWED
+  NOT_ACCEPTABLE
+  PROXY_AUTHENTICATION_REQUIRED
+  REQUEST_TIMEOUT
+  CONFLICT
+  GONE
+  LENGTH_REQUIRED
+  PRECONDITION_FAILED
+  PAYLOAD_TOO_LARGE
+  URI_TOO_LONG
+  UNSUPPORTED_MEDIA_TYPE
+  REQUESTED_RANGE_NOT_SATISFIABLE
+  EXPECTATION_FAILED
+  I_AM_A_TEAPOT
+  MISDIRECTED
+  UNPROCESSABLE_ENTITY
+  FAILED_DEPENDENCY
+  PRECONDITION_REQUIRED
+  TOO_MANY_REQUESTS
+  INTERNAL_SERVER_ERROR
+  NOT_IMPLEMENTED
+  BAD_GATEWAY
+  SERVICE_UNAVAILABLE
+  GATEWAY_TIMEOUT
+  HTTP_VERSION_NOT_SUPPORTED
+}
+
+type Query {
+  getAllRestaurant(limit: Int, page: Int, filter: FilterRestaurantArg): [Restaurant!]!
+  getOneRestaurant(restaurantId: String!): Restaurant!
+  getAllReservation(limit: Int, page: Int, FilterReservationArg: FilterReservationArg): [Reservation!]!
+  getOneReservation(reservationId: String!): Reservation!
+}
+
+input FilterRestaurantArg {
+  name: String
+  city: String
+  firtCharCity: String
+}
+
+input FilterReservationArg {
+  email: String
+  restaurantId: String
+}
+
+type Mutation {
+  createRestaurantR(createRestaurantInput: CreateRestaurantDto!): ResponseHttp!
+  createReservationR(createReservationInput: CreateReservationDto!): ResponseHttp!
+}
+
+input CreateRestaurantDto {
+  """What needs to be done"""
+  name: String!
+
+  """What needs to be done"""
+  description: String!
+
+  """What needs to be done"""
+  address: String!
+
+  """What needs to be done"""
+  city: String!
+
+  """What needs to be done"""
+  photo: String!
+}
+
+input CreateReservationDto {
+  """What needs to be done"""
+  name: String!
+
+  """What needs to be done"""
+  restaurantId: String!
+
+  """What needs to be done"""
+  phone: String!
+
+  """What needs to be done"""
+  email: String!
+
+  """Format yyyy-mm-dd"""
+  reservationDate: String!
+}
